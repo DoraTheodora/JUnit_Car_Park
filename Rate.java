@@ -110,8 +110,9 @@ public class Rate {
                 StudentRate studentRate = new StudentRate();
                 finalCost = studentRate.payment(totalCost).setScale(round, BigDecimal.ROUND_HALF_UP);
                 break;
-            default:
-                finalCost = totalCost;
+            case STAFF:
+                StaffRate staffRate = new StaffRate();
+                finalCost = staffRate.payment(totalCost).setScale(round, BigDecimal.ROUND_HALF_UP);
                 break;
         }
         return finalCost;

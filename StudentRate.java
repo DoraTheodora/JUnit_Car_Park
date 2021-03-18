@@ -3,6 +3,7 @@ package cm;
 import java.math.BigDecimal;
 
 public class StudentRate implements IReduction {
+
     public StudentRate()
     {
 
