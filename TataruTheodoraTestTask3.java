@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 
 
-public class TataruTheodoraTestTask2
+public class TataruTheodoraTestTask3
 {
 	Rate testRate;
 	
