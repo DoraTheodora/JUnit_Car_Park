@@ -744,4 +744,276 @@ public class TataruTheodoraTestTask3
 		BigDecimal expectedCost = new BigDecimal("0.5");
 		Assert.assertEquals(expectedCost, realCost);
 	}
+
+	//Precondition: a rate object needs to be created to test the calculate() method
+	public Rate rateObject_Management()
+	{
+		CarParkKind parkKind = CarParkKind.MANAGEMENT;
+		BigDecimal normalRate = new BigDecimal(9);
+		BigDecimal reducedRate = new BigDecimal(3);
+		ArrayList<Period> normalPeriods = new ArrayList<>();
+		normalPeriods.add(new Period(8, 12));
+		ArrayList<Period> reducedPeriods = new ArrayList<>();
+		reducedPeriods.add(new Period(12,17));
+
+		//when
+		return new Rate(parkKind, normalRate, reducedRate,reducedPeriods, normalPeriods);
+	}
+
+	@Test
+	public void Test01Calculate() throws IllegalArgumentException
+	{
+		// Partitioned Test -> startHour < endHour
+		// 9 euro total
+
+		//given
+		Rate rate = rateObject_Management();
+		int startHour = 11;
+		int endHour = 12;
+
+		//when
+		Period car1 = new Period(startHour, endHour);
+		BigDecimal realCost = rate.calculate(car1);
+
+		//then
+		BigDecimal expectedCost = new BigDecimal("9");
+		Assert.assertEquals(expectedCost, realCost);
+	}
+
+	@Test
+	public void Test02Calculate() throws IllegalArgumentException
+	{
+		//Partitioned Test -> startHour == 0
+		// 51 euro in total
+
+		//given
+		Rate rate = rateObject_Management();
+
+		//when
+		int startHour = 0;
+		int endHour = 20;
+		Period car1 = new Period(startHour, endHour);
+		BigDecimal realCost = rate.calculate(car1);
+
+		//then
+		BigDecimal expectedCost = new BigDecimal("51");
+		Assert.assertEquals(expectedCost, realCost);
+	}
+
+
+	@Test(expected = IllegalArgumentException.class)
+	public void Test03Calculate() throws IllegalArgumentException
+	{
+		//Partitioned Test -> endHour == 0
+
+		//given
+		Rate rate = rateObject_Visitor();
+
+		//when
+		int startHour = 0;
+		int endHour = 0;
+		Period car1 = new Period(startHour, endHour);
+
+		//then
+		rate.calculate(car1);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void Test04Calculate() throws IllegalArgumentException
+	{
+		//Partitioned Test -> startHour == endHour
+
+		//given
+		Rate rate = rateObject_Visitor();
+
+		//when
+		int startHour = 17;
+		int endHour = 17;
+		Period car1 = new Period(startHour, endHour);
+
+		//then
+		rate.calculate(car1);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void Test05Calculate() throws IllegalArgumentException
+	{
+		//Partitioned Test -> startHour > endHour
+
+		//given
+		Rate rate = rateObject_Visitor();
+
+		//when
+		int startHour = 19;
+		int endHour = 17;
+		Period car1 = new Period(startHour, endHour);
+
+		//then
+		rate.calculate(car1);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void Test06Calculate() throws IllegalArgumentException
+	{
+		//Partitioned Test -> startHour < 0
+
+		//given
+		Rate rate = rateObject_Visitor();
+
+		//when
+		int startHour = -2;
+		int endHour = 13;
+		Period car1 = new Period(startHour, endHour);
+
+		//then
+		rate.calculate(car1);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void Test07Calculate() throws IllegalArgumentException
+	{
+		//Partitioned Test -> startHour > 24
+
+		//given
+		Rate rate = rateObject_Visitor();
+
+		//when
+		int startHour = 25;
+		int endHour = 13;
+		Period car1 = new Period(startHour, endHour);
+
+		//then
+		rate.calculate(car1);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void Test08Calculate() throws IllegalArgumentException
+	{
+		//Partitioned Test -> endHour < 0
+
+		//given
+		Rate rate = rateObject_Visitor();
+
+		//when
+		int startHour = 13;
+		int endHour = -1;
+		Period car1 = new Period(startHour, endHour);
+
+		//then
+		rate.calculate(car1);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void Test09Calculate() throws IllegalArgumentException
+	{
+		//Partitioned Test -> endHour > 24
+
+		//given
+		Rate rate = rateObject_Visitor();
+
+		//when
+		int startHour = 13;
+		int endHour = 26;
+		Period car1 = new Period(startHour, endHour);
+
+		//then
+		rate.calculate(car1);
+	}
+	@Test
+	public void Test010Calculate() throws IllegalArgumentException
+	{
+		//Partitioned Test -> endHour == 24
+		// 51 euro in total
+
+		//given
+		Rate rate = rateObject_Visitor();
+
+		//when
+		int startHour = 3;
+		int endHour = 24;
+		Period car1 = new Period(startHour, endHour);
+		BigDecimal realCost = rate.calculate(car1);
+
+		//then
+		BigDecimal expectedCost = new BigDecimal("51");
+		Assert.assertEquals(expectedCost, realCost);
+	}
+	@Test
+	public void Test011Calculate() throws IllegalArgumentException
+	{
+		//Partitioned Test -> startHour && endHour outside paying periods
+
+		//given
+		Rate rate = rateObject_Visitor();
+
+		//when
+		int startHour = 19;
+		int endHour = 21;
+		Period car1 = new Period(startHour, endHour);
+		BigDecimal realCost = rate.calculate(car1);
+
+		//then
+		BigDecimal expectedCost = new BigDecimal("3");
+		Assert.assertEquals(expectedCost, realCost);
+	}
+	@Test
+	public void Test012Calculate() throws IllegalArgumentException
+	{
+		//Partitioned Test -> startHour && endHour cover all day
+		// 51 euro in total
+
+
+		//given
+		Rate rate = rateObject_Visitor();
+
+		//when
+		int startHour = 0;
+		int endHour = 24;
+		Period car1 = new Period(startHour, endHour);
+		BigDecimal realCost = rate.calculate(car1);
+
+		//then
+		BigDecimal expectedCost = new BigDecimal("51");
+		Assert.assertEquals(expectedCost, realCost);
+	}
+
+	public void Test013Calculate() throws IllegalArgumentException
+	{
+		//Partitioned Test -> paring only in the normal period
+		// 18 euro in total
+
+		//given
+		Rate rate = rateObject_Visitor();
+
+		//when
+		int startHour = 9;
+		int endHour = 11;
+		Period car1 = new Period(startHour, endHour);
+		BigDecimal realCost = rate.calculate(car1);
+
+		//then
+		BigDecimal expectedCost = new BigDecimal("18");
+		Assert.assertEquals(expectedCost, realCost);
+	}
+
+	public void Test014Calculate() throws IllegalArgumentException
+	{
+		//Partitioned Test -> paring only in the reduced period
+		// 9 euro in total
+
+		//given
+		Rate rate = rateObject_Visitor();
+
+		//when
+		int startHour = 13;
+		int endHour = 16;
+		Period car1 = new Period(startHour, endHour);
+		BigDecimal realCost = rate.calculate(car1);
+
+		//then
+		BigDecimal expectedCost = new BigDecimal("9");
+		Assert.assertEquals(expectedCost, realCost);
+	}
 }
+
+
