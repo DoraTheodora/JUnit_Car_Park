@@ -7,7 +7,7 @@ public class VisitorRate implements IReduction {
     {
 
     }
-    
+
     @Override
     public BigDecimal payment(BigDecimal totalCost)
     {
