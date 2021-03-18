@@ -497,7 +497,7 @@ public class TataruTheodoraTestTask3
 		BigDecimal realCost = rate.calculate(car1);
 		
 		//then
-        BigDecimal expectedCost = new BigDecimal("2");
+        BigDecimal expectedCost = new BigDecimal("0.5");
         Assert.assertEquals(expectedCost, realCost);
 	}
 	
