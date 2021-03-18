@@ -10,10 +10,10 @@ public class VisitorRate
     }
     public BigDecimal payment(BigDecimal totalCost)
     {
-        BigDecimal freeAmount = new BigDecimal("8");
-        BigDecimal reduction = new BigDecimal("0.5");
-        if(totalCost.subtract(freeAmount).compareTo(new BigDecimal("0")) <= 0)
-            return new BigDecimal("0");
+        BigDecimal freeAmount = new BigDecimal("8.00");
+        BigDecimal reduction = new BigDecimal("0.50");
+        if(totalCost.subtract(freeAmount).compareTo(new BigDecimal("0.00")) <= 0)
+            return new BigDecimal("0.00");
         else
             return (totalCost.subtract(freeAmount)).multiply(reduction);
 

@@ -1,6 +1,7 @@
 package cm;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -89,16 +90,21 @@ public class Rate {
         return isValid;
     }
     public BigDecimal calculate(Period periodStay) {
+        int round = 2;
         int normalRateHours = periodStay.occurences(normal);
         int reducedRateHours = periodStay.occurences(reduced);
         BigDecimal totalCost = (this.hourlyNormalRate.multiply(BigDecimal.valueOf(normalRateHours))).add(
                 this.hourlyReducedRate.multiply(BigDecimal.valueOf(reducedRateHours)));
-        BigDecimal finalCost = new BigDecimal("0");
+        BigDecimal finalCost = new BigDecimal("0.00");
 
         switch (this.kind) {
             case VISITOR:
                 VisitorRate visitorRate = new VisitorRate();
-                finalCost = visitorRate.payment(totalCost);
+                finalCost = visitorRate.payment(totalCost).setScale(round, RoundingMode.HALF_UP);
+                break;
+            case MANAGEMENT:
+                ManagementRate managementRate = new ManagementRate();
+                finalCost = managementRate.payment(totalCost).setScale(round, RoundingMode.HALF_UP);
                 break;
             default:
                 finalCost = totalCost;

@@ -480,7 +480,7 @@ public class TataruTheodoraTestTask3
 	}
 	
 	@Test
-	public void Test1Calculate() throws IllegalArgumentException
+	public void Test1CalculateVisitor() throws IllegalArgumentException
 	{
 		// Partitioned Test -> startHour < endHour
 		// 12 euro in total
@@ -497,12 +497,12 @@ public class TataruTheodoraTestTask3
 		BigDecimal realCost = rate.calculate(car1);
 		
 		//then
-        BigDecimal expectedCost = new BigDecimal("0.5");
+        BigDecimal expectedCost = new BigDecimal("0.50");
         Assert.assertEquals(expectedCost, realCost);
 	}
 	
 	@Test
-	public void Test2Calculate() throws IllegalArgumentException
+	public void Test2CalculateVisitor() throws IllegalArgumentException
 	{
 		//Partitioned Test -> startHour == 0
 		// 51 euro in total
@@ -519,13 +519,13 @@ public class TataruTheodoraTestTask3
         BigDecimal realCost = rate.calculate(car1);
 
         //then
-        BigDecimal expectedCost = new BigDecimal("21.5");
+        BigDecimal expectedCost = new BigDecimal("21.50");
         Assert.assertEquals(expectedCost, realCost);
 	}
 
 	
 	@Test(expected = IllegalArgumentException.class)
-	public void Test3Calculate() throws IllegalArgumentException
+	public void Test3CalculateVisitor() throws IllegalArgumentException
 	{
 		//Partitioned Test -> endHour == 0
 		
@@ -542,7 +542,7 @@ public class TataruTheodoraTestTask3
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
-	public void Test4Calculate() throws IllegalArgumentException
+	public void Test4CalculateVisitor() throws IllegalArgumentException
 	{
 		//Partitioned Test -> startHour == endHour
 		
@@ -559,7 +559,7 @@ public class TataruTheodoraTestTask3
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
-	public void Test5Calculate() throws IllegalArgumentException
+	public void Test5CalculateVisitor() throws IllegalArgumentException
 	{
 		//Partitioned Test -> startHour > endHour
 		
@@ -576,7 +576,7 @@ public class TataruTheodoraTestTask3
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void Test6Calculate() throws IllegalArgumentException
+	public void Test6CalculateVisitor() throws IllegalArgumentException
 	{
 		//Partitioned Test -> startHour < 0
 		
@@ -593,7 +593,7 @@ public class TataruTheodoraTestTask3
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
-	public void Test7Calculate() throws IllegalArgumentException
+	public void Test7CalculateVisitor() throws IllegalArgumentException
 	{
 		//Partitioned Test -> startHour > 24
 		
@@ -610,7 +610,7 @@ public class TataruTheodoraTestTask3
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
-	public void Test8Calculate() throws IllegalArgumentException
+	public void Test8CalculateVisitor() throws IllegalArgumentException
 	{
 		//Partitioned Test -> endHour < 0
 		
@@ -627,7 +627,7 @@ public class TataruTheodoraTestTask3
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
-	public void Test9Calculate() throws IllegalArgumentException
+	public void Test9CalculateVisitor() throws IllegalArgumentException
 	{
 		//Partitioned Test -> endHour > 24
 		
@@ -643,7 +643,7 @@ public class TataruTheodoraTestTask3
 	    rate.calculate(car1);
 	}
 	@Test
-	public void Test10Calculate() throws IllegalArgumentException
+	public void Test10CalculateVisitor() throws IllegalArgumentException
 	{
 		//Partitioned Test -> endHour == 24
 		// 51 euro in total
@@ -660,11 +660,11 @@ public class TataruTheodoraTestTask3
         BigDecimal realCost = rate.calculate(car1);
 
         //then
-        BigDecimal expectedCost = new BigDecimal("21.5");
+        BigDecimal expectedCost = new BigDecimal("21.50");
         Assert.assertEquals(expectedCost, realCost);
 	}
     @Test
-    public void Test11Calculate() throws IllegalArgumentException
+    public void Test11CalculateVisitor() throws IllegalArgumentException
     {
         //Partitioned Test -> startHour && endHour outside paying periods
 
@@ -678,11 +678,11 @@ public class TataruTheodoraTestTask3
         BigDecimal realCost = rate.calculate(car1);
 
         //then
-        BigDecimal expectedCost = new BigDecimal("0");
+        BigDecimal expectedCost = new BigDecimal("0.00");
         Assert.assertEquals(expectedCost, realCost);
     }
     @Test
-    public void Test12Calculate() throws IllegalArgumentException
+    public void Test12CalculateVisitor() throws IllegalArgumentException
     {
         //Partitioned Test -> startHour && endHour cover all day
 		// 51 euro in total
@@ -699,11 +699,11 @@ public class TataruTheodoraTestTask3
         BigDecimal realCost = rate.calculate(car1);
 
         //then
-        BigDecimal expectedCost = new BigDecimal("21.5");
+        BigDecimal expectedCost = new BigDecimal("21.50");
         Assert.assertEquals(expectedCost, realCost);
     }
-
-	public void Test13Calculate() throws IllegalArgumentException
+	@Test
+	public void Test13CalculateVisitor() throws IllegalArgumentException
 	{
 		//Partitioned Test -> paring only in the normal period
 		// 18 euro in total
@@ -720,11 +720,11 @@ public class TataruTheodoraTestTask3
 		BigDecimal realCost = rate.calculate(car1);
 
 		//then
-		BigDecimal expectedCost = new BigDecimal("5");
+		BigDecimal expectedCost = new BigDecimal("5.00");
 		Assert.assertEquals(expectedCost, realCost);
 	}
-
-	public void Test14Calculate() throws IllegalArgumentException
+	@Test
+	public void Test14CalculateVisitor() throws IllegalArgumentException
 	{
 		//Partitioned Test -> paring only in the reduced period
 		// 9 euro in total
@@ -741,7 +741,7 @@ public class TataruTheodoraTestTask3
 		BigDecimal realCost = rate.calculate(car1);
 
 		//then
-		BigDecimal expectedCost = new BigDecimal("0.5");
+		BigDecimal expectedCost = new BigDecimal("0.50");
 		Assert.assertEquals(expectedCost, realCost);
 	}
 
@@ -761,7 +761,7 @@ public class TataruTheodoraTestTask3
 	}
 
 	@Test
-	public void Test01Calculate() throws IllegalArgumentException
+	public void Test1CalculateManagement() throws IllegalArgumentException
 	{
 		// Partitioned Test -> startHour < endHour
 		// 9 euro total
@@ -776,12 +776,12 @@ public class TataruTheodoraTestTask3
 		BigDecimal realCost = rate.calculate(car1);
 
 		//then
-		BigDecimal expectedCost = new BigDecimal("9");
+		BigDecimal expectedCost = new BigDecimal("9.00");
 		Assert.assertEquals(expectedCost, realCost);
 	}
 
 	@Test
-	public void Test02Calculate() throws IllegalArgumentException
+	public void Test2CalculateManagement() throws IllegalArgumentException
 	{
 		//Partitioned Test -> startHour == 0
 		// 51 euro in total
@@ -796,18 +796,18 @@ public class TataruTheodoraTestTask3
 		BigDecimal realCost = rate.calculate(car1);
 
 		//then
-		BigDecimal expectedCost = new BigDecimal("51");
+		BigDecimal expectedCost = new BigDecimal("51.00");
 		Assert.assertEquals(expectedCost, realCost);
 	}
 
 
 	@Test(expected = IllegalArgumentException.class)
-	public void Test03Calculate() throws IllegalArgumentException
+	public void Test3CalculateManagement() throws IllegalArgumentException
 	{
 		//Partitioned Test -> endHour == 0
 
 		//given
-		Rate rate = rateObject_Visitor();
+		Rate rate = rateObject_Management();
 
 		//when
 		int startHour = 0;
@@ -819,12 +819,12 @@ public class TataruTheodoraTestTask3
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void Test04Calculate() throws IllegalArgumentException
+	public void Test4CalculateManagement() throws IllegalArgumentException
 	{
 		//Partitioned Test -> startHour == endHour
 
 		//given
-		Rate rate = rateObject_Visitor();
+		Rate rate = rateObject_Management();
 
 		//when
 		int startHour = 17;
@@ -836,12 +836,12 @@ public class TataruTheodoraTestTask3
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void Test05Calculate() throws IllegalArgumentException
+	public void Test5CalculateManagement() throws IllegalArgumentException
 	{
 		//Partitioned Test -> startHour > endHour
 
 		//given
-		Rate rate = rateObject_Visitor();
+		Rate rate = rateObject_Management();
 
 		//when
 		int startHour = 19;
@@ -853,12 +853,12 @@ public class TataruTheodoraTestTask3
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void Test06Calculate() throws IllegalArgumentException
+	public void Test6CalculateManagement() throws IllegalArgumentException
 	{
 		//Partitioned Test -> startHour < 0
 
 		//given
-		Rate rate = rateObject_Visitor();
+		Rate rate = rateObject_Management();
 
 		//when
 		int startHour = -2;
@@ -870,12 +870,12 @@ public class TataruTheodoraTestTask3
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void Test07Calculate() throws IllegalArgumentException
+	public void Test7CalculateManagement() throws IllegalArgumentException
 	{
 		//Partitioned Test -> startHour > 24
 
 		//given
-		Rate rate = rateObject_Visitor();
+		Rate rate = rateObject_Management();
 
 		//when
 		int startHour = 25;
@@ -887,12 +887,12 @@ public class TataruTheodoraTestTask3
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void Test08Calculate() throws IllegalArgumentException
+	public void Test8CalculateManagement() throws IllegalArgumentException
 	{
 		//Partitioned Test -> endHour < 0
 
 		//given
-		Rate rate = rateObject_Visitor();
+		Rate rate = rateObject_Management();
 
 		//when
 		int startHour = 13;
@@ -904,12 +904,12 @@ public class TataruTheodoraTestTask3
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void Test09Calculate() throws IllegalArgumentException
+	public void Test9CalculateManagement() throws IllegalArgumentException
 	{
 		//Partitioned Test -> endHour > 24
 
 		//given
-		Rate rate = rateObject_Visitor();
+		Rate rate = rateObject_Management();
 
 		//when
 		int startHour = 13;
@@ -920,13 +920,13 @@ public class TataruTheodoraTestTask3
 		rate.calculate(car1);
 	}
 	@Test
-	public void Test010Calculate() throws IllegalArgumentException
+	public void Test10CalculateManagement() throws IllegalArgumentException
 	{
 		//Partitioned Test -> endHour == 24
 		// 51 euro in total
 
 		//given
-		Rate rate = rateObject_Visitor();
+		Rate rate = rateObject_Management();
 
 		//when
 		int startHour = 3;
@@ -935,16 +935,16 @@ public class TataruTheodoraTestTask3
 		BigDecimal realCost = rate.calculate(car1);
 
 		//then
-		BigDecimal expectedCost = new BigDecimal("51");
+		BigDecimal expectedCost = new BigDecimal("51.00");
 		Assert.assertEquals(expectedCost, realCost);
 	}
 	@Test
-	public void Test011Calculate() throws IllegalArgumentException
+	public void Test11CalculateManagement() throws IllegalArgumentException
 	{
 		//Partitioned Test -> startHour && endHour outside paying periods
 
 		//given
-		Rate rate = rateObject_Visitor();
+		Rate rate = rateObject_Management();
 
 		//when
 		int startHour = 19;
@@ -953,18 +953,18 @@ public class TataruTheodoraTestTask3
 		BigDecimal realCost = rate.calculate(car1);
 
 		//then
-		BigDecimal expectedCost = new BigDecimal("3");
+		BigDecimal expectedCost = new BigDecimal("3.00");
 		Assert.assertEquals(expectedCost, realCost);
 	}
 	@Test
-	public void Test012Calculate() throws IllegalArgumentException
+	public void Test12CalculateManagement() throws IllegalArgumentException
 	{
 		//Partitioned Test -> startHour && endHour cover all day
 		// 51 euro in total
 
 
 		//given
-		Rate rate = rateObject_Visitor();
+		Rate rate = rateObject_Management();
 
 		//when
 		int startHour = 0;
@@ -973,17 +973,18 @@ public class TataruTheodoraTestTask3
 		BigDecimal realCost = rate.calculate(car1);
 
 		//then
-		BigDecimal expectedCost = new BigDecimal("51");
+		BigDecimal expectedCost = new BigDecimal("51.00");
 		Assert.assertEquals(expectedCost, realCost);
 	}
 
-	public void Test013Calculate() throws IllegalArgumentException
+	@Test
+	public void Test13CalculateManagement() throws IllegalArgumentException
 	{
 		//Partitioned Test -> paring only in the normal period
 		// 18 euro in total
 
 		//given
-		Rate rate = rateObject_Visitor();
+		Rate rate = rateObject_Management();
 
 		//when
 		int startHour = 9;
@@ -992,17 +993,18 @@ public class TataruTheodoraTestTask3
 		BigDecimal realCost = rate.calculate(car1);
 
 		//then
-		BigDecimal expectedCost = new BigDecimal("18");
+		BigDecimal expectedCost = new BigDecimal("18.00");
 		Assert.assertEquals(expectedCost, realCost);
 	}
 
-	public void Test014Calculate() throws IllegalArgumentException
+	@Test
+	public void Test14CalculateManagement() throws IllegalArgumentException
 	{
 		//Partitioned Test -> paring only in the reduced period
 		// 9 euro in total
 
 		//given
-		Rate rate = rateObject_Visitor();
+		Rate rate = rateObject_Management();
 
 		//when
 		int startHour = 13;
@@ -1011,7 +1013,7 @@ public class TataruTheodoraTestTask3
 		BigDecimal realCost = rate.calculate(car1);
 
 		//then
-		BigDecimal expectedCost = new BigDecimal("9");
+		BigDecimal expectedCost = new BigDecimal("9.00");
 		Assert.assertEquals(expectedCost, realCost);
 	}
 }
