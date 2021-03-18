@@ -2,12 +2,13 @@ package cm;
 
 import java.math.BigDecimal;
 
-public class VisitorRate
-{
+public class VisitorRate implements IReduction {
     public VisitorRate()
     {
 
     }
+    
+    @Override
     public BigDecimal payment(BigDecimal totalCost)
     {
         BigDecimal freeAmount = new BigDecimal("8.00");

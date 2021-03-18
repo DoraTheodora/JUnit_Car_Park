@@ -106,6 +106,10 @@ public class Rate {
                 ManagementRate managementRate = new ManagementRate();
                 finalCost = managementRate.payment(totalCost).setScale(round, RoundingMode.HALF_UP);
                 break;
+            case STUDENT:
+                StudentRate studentRate = new StudentRate();
+                finalCost = studentRate.payment(totalCost).setScale(round, BigDecimal.ROUND_HALF_UP);
+                break;
             default:
                 finalCost = totalCost;
                 break;
