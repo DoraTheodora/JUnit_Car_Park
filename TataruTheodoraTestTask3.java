@@ -465,7 +465,7 @@ public class TataruTheodoraTestTask3
 	}
 	
 	//Precondition: a rate object needs to be created to test the calculate() method
-	public Rate preconditionCalculateMethod()
+	public Rate rateObject_Visitor()
 	{
 		CarParkKind parkKind = CarParkKind.VISITOR;
 		BigDecimal normalRate = new BigDecimal(9);
@@ -482,10 +482,13 @@ public class TataruTheodoraTestTask3
 	@Test
 	public void Test1Calculate() throws IllegalArgumentException
 	{
-		//Partitioned Test -> startHour < endHour
+		// Partitioned Test -> startHour < endHour
+		// 12 euro in total
+		// 8 free -> 12 - 8 = 4
+		// 50% off = 4 * 0.5 = 2
 		
 		//given
-		Rate rate = preconditionCalculateMethod();
+		Rate rate = rateObject_Visitor();
 		int startHour = 11;
 		int endHour = 12;
 		
@@ -494,7 +497,7 @@ public class TataruTheodoraTestTask3
 		BigDecimal realCost = rate.calculate(car1);
 		
 		//then
-        BigDecimal expectedCost = new BigDecimal("9");
+        BigDecimal expectedCost = new BigDecimal("2");
         Assert.assertEquals(expectedCost, realCost);
 	}
 	
@@ -502,9 +505,12 @@ public class TataruTheodoraTestTask3
 	public void Test2Calculate() throws IllegalArgumentException
 	{
 		//Partitioned Test -> startHour == 0
+		// 51 euro in total
+		// 8 free -> 51 - 8 = 43
+		// 50% off = 43 * 0.5 = 21.5
 		
 		//given
-		Rate rate = preconditionCalculateMethod(); 
+		Rate rate = rateObject_Visitor();
 		
 		//when
 		int startHour = 0;
@@ -513,7 +519,7 @@ public class TataruTheodoraTestTask3
         BigDecimal realCost = rate.calculate(car1);
 
         //then
-        BigDecimal expectedCost = new BigDecimal("51");
+        BigDecimal expectedCost = new BigDecimal("21.5");
         Assert.assertEquals(expectedCost, realCost);
 	}
 
@@ -524,7 +530,7 @@ public class TataruTheodoraTestTask3
 		//Partitioned Test -> endHour == 0
 		
 		//given
-		Rate rate = preconditionCalculateMethod();
+		Rate rate = rateObject_Visitor();
 		
 		//when
 		int startHour = 0;
@@ -541,7 +547,7 @@ public class TataruTheodoraTestTask3
 		//Partitioned Test -> startHour == endHour
 		
 		//given
-		Rate rate = preconditionCalculateMethod();
+		Rate rate = rateObject_Visitor();
 		
 		//when
 		int startHour = 17;
@@ -558,7 +564,7 @@ public class TataruTheodoraTestTask3
 		//Partitioned Test -> startHour > endHour
 		
 		//given
-		Rate rate = preconditionCalculateMethod();
+		Rate rate = rateObject_Visitor();
 		
 		//when
 		int startHour = 19;
@@ -575,7 +581,7 @@ public class TataruTheodoraTestTask3
 		//Partitioned Test -> startHour < 0
 		
 		//given
-		Rate rate = preconditionCalculateMethod();
+		Rate rate = rateObject_Visitor();
 		
 		//when
 		int startHour = -2;
@@ -592,7 +598,7 @@ public class TataruTheodoraTestTask3
 		//Partitioned Test -> startHour > 24
 		
 		//given
-		Rate rate = preconditionCalculateMethod();
+		Rate rate = rateObject_Visitor();
 		
 		//when
 		int startHour = 25;
@@ -609,7 +615,7 @@ public class TataruTheodoraTestTask3
 		//Partitioned Test -> endHour < 0
 		
 		//given
-		Rate rate = preconditionCalculateMethod();
+		Rate rate = rateObject_Visitor();
 		
 		//when
 		int startHour = 13;
@@ -626,7 +632,7 @@ public class TataruTheodoraTestTask3
 		//Partitioned Test -> endHour > 24
 		
 		//given
-		Rate rate = preconditionCalculateMethod();
+		Rate rate = rateObject_Visitor();
 		
 		//when
 		int startHour = 13;
@@ -640,9 +646,12 @@ public class TataruTheodoraTestTask3
 	public void Test10Calculate() throws IllegalArgumentException
 	{
 		//Partitioned Test -> endHour == 24
+		// 51 euro in total
+		// 8 free -> 51 - 8 = 43
+		// 50% off = 43 * 0.5 = 21.5
 
 		//given
-		Rate rate = preconditionCalculateMethod();
+		Rate rate = rateObject_Visitor();
 
 		//when
 		int startHour = 3;
@@ -651,7 +660,7 @@ public class TataruTheodoraTestTask3
         BigDecimal realCost = rate.calculate(car1);
 
         //then
-        BigDecimal expectedCost = new BigDecimal("51");
+        BigDecimal expectedCost = new BigDecimal("21.5");
         Assert.assertEquals(expectedCost, realCost);
 	}
     @Test
@@ -660,7 +669,7 @@ public class TataruTheodoraTestTask3
         //Partitioned Test -> startHour && endHour outside paying periods
 
         //given
-        Rate rate = preconditionCalculateMethod();
+        Rate rate = rateObject_Visitor();
 
         //when
         int startHour = 19;
@@ -676,9 +685,12 @@ public class TataruTheodoraTestTask3
     public void Test12Calculate() throws IllegalArgumentException
     {
         //Partitioned Test -> startHour && endHour cover all day
+		// 51 euro in total
+		// 8 free -> 51 - 8 = 43
+		// 50% off = 43 * 0.5 = 21.5
 
         //given
-        Rate rate = preconditionCalculateMethod();
+        Rate rate = rateObject_Visitor();
 
         //when
         int startHour = 0;
@@ -687,7 +699,49 @@ public class TataruTheodoraTestTask3
         BigDecimal realCost = rate.calculate(car1);
 
         //then
-        BigDecimal expectedCost = new BigDecimal("51");
+        BigDecimal expectedCost = new BigDecimal("21.5");
         Assert.assertEquals(expectedCost, realCost);
     }
+
+	public void Test13Calculate() throws IllegalArgumentException
+	{
+		//Partitioned Test -> paring only in the normal period
+		// 18 euro in total
+		// 8 free -> 18 - 8 = 10
+		// 50% off = 10 * 0.5 = 5
+
+		//given
+		Rate rate = rateObject_Visitor();
+
+		//when
+		int startHour = 9;
+		int endHour = 11;
+		Period car1 = new Period(startHour, endHour);
+		BigDecimal realCost = rate.calculate(car1);
+
+		//then
+		BigDecimal expectedCost = new BigDecimal("5");
+		Assert.assertEquals(expectedCost, realCost);
+	}
+
+	public void Test14Calculate() throws IllegalArgumentException
+	{
+		//Partitioned Test -> paring only in the reduced period
+		// 9 euro in total
+		// 8 free -> 9 - 8 = 1
+		// 50% off = 1 * 0.5 = 0.5
+
+		//given
+		Rate rate = rateObject_Visitor();
+
+		//when
+		int startHour = 13;
+		int endHour = 16;
+		Period car1 = new Period(startHour, endHour);
+		BigDecimal realCost = rate.calculate(car1);
+
+		//then
+		BigDecimal expectedCost = new BigDecimal("0.5");
+		Assert.assertEquals(expectedCost, realCost);
+	}
 }
