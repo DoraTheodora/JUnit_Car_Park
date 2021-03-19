@@ -3,10 +3,6 @@ package cm;
 import java.math.BigDecimal;
 
 public class VisitorRate implements IReduction {
-    public VisitorRate()
-    {
-
-    }
 
     @Override
     public BigDecimal payment(BigDecimal totalCost)

@@ -4,11 +4,6 @@ import java.math.BigDecimal;
 
 public class StudentRate implements IReduction {
 
-    public StudentRate()
-    {
-
-    }
-
     @Override
     public BigDecimal payment(BigDecimal totalCost)
     {
