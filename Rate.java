@@ -95,24 +95,28 @@ public class Rate {
         int reducedRateHours = periodStay.occurences(reduced);
         BigDecimal totalCost = (this.hourlyNormalRate.multiply(BigDecimal.valueOf(normalRateHours))).add(
                 this.hourlyReducedRate.multiply(BigDecimal.valueOf(reducedRateHours)));
-        BigDecimal finalCost;
-        Payment pay = null;
+
+        BigDecimal finalCost = new BigDecimal("0.00");
+        IReduction reduction;
 
         switch (this.kind) {
             case VISITOR:
-                pay = new Payment(new VisitorRate());
+                reduction = new VisitorRate();
+                finalCost = reduction.payment(totalCost).setScale(round, RoundingMode.HALF_UP);
                 break;
             case MANAGEMENT:
-                pay = new Payment(new ManagementRate());
+                reduction = new ManagementRate();
+                finalCost = reduction.payment(totalCost).setScale(round, RoundingMode.HALF_UP);
                 break;
             case STUDENT:
-                pay = new Payment(new StudentRate());
+                reduction = new StudentRate();
+                finalCost = reduction.payment(totalCost).setScale(round, RoundingMode.HALF_UP);
                 break;
             case STAFF:
-                pay = new Payment(new StaffRate());
+                reduction = new StaffRate();
+                finalCost = reduction.payment(totalCost).setScale(round, RoundingMode.HALF_UP);
                 break;
         }
-        finalCost = pay.payment(totalCost).setScale(round, RoundingMode.HALF_UP);
         return finalCost;
     }
 
