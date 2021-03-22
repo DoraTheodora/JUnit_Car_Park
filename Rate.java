@@ -102,21 +102,21 @@ public class Rate {
         switch (this.kind) {
             case VISITOR:
                 reduction = new VisitorRate();
-                finalCost = reduction.payment(totalCost).setScale(round, RoundingMode.HALF_UP);
                 break;
             case MANAGEMENT:
                 reduction = new ManagementRate();
-                finalCost = reduction.payment(totalCost).setScale(round, RoundingMode.HALF_UP);
                 break;
             case STUDENT:
                 reduction = new StudentRate();
-                finalCost = reduction.payment(totalCost).setScale(round, RoundingMode.HALF_UP);
                 break;
             case STAFF:
                 reduction = new StaffRate();
-                finalCost = reduction.payment(totalCost).setScale(round, RoundingMode.HALF_UP);
                 break;
+            default:
+                throw new IllegalArgumentException("KIND not accepted");
+
         }
+        finalCost = reduction.payment(totalCost).setScale(round, RoundingMode.HALF_UP);
         return finalCost;
     }
 
